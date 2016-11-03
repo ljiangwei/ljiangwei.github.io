@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-js兼容" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/03/js兼容/" class="article-date">
+  <time datetime="2016-11-03T11:38:19.000Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/03/js兼容/">js兼容</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="1、关键字冲突问题"><a href="#1、关键字冲突问题" class="headerlink" title="1、关键字冲突问题"></a>1、关键字冲突问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：CSS属性与JavaScript中的保留关键字命名相同，IE中style+属性，非IE中css+属性，class是javascript中的保留关键字。<br>解决办法：规范自己的命名方式，尽量有意义的命名<br></font>
+
+<h5 id="2、innerText问题"><a href="#2、innerText问题" class="headerlink" title="2、innerText问题"></a>2、innerText问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222">运行环境：innerText在IE浏览器中可以正常的使用，但是在Firefox（火狐）中却不能正常使用，Firefox使用的是textContent。<br>解决办法：element.innerText = element.textContent = ‘value’;<br>          或者自己封装一个简单的js<br>          <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">//获取标签内容</div><div class="line">function getInnerText（ele）&#123;</div><div class="line">  //能力检测</div><div class="line">  if(typeof ele.innerText === 'string')&#123;</div><div class="line">      return ele.innerText;</div><div class="line">  &#125;else&#123;</div><div class="line">  return ele.textContent;</div><div class="line">      &#125;</div><div class="line">  &#125;</div><div class="line">  //设置标签内容</div><div class="line">  function setInnerText(ele,value)&#123;</div><div class="line">      if(typeof ele.innerText === 'string')&#123;</div><div class="line">          ele.innerText = value;</div><div class="line">      &#125;else&#123;</div><div class="line">          ele.textContent = value;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure><br><br></font>
+
+<h5 id="3、自定义属性问题"><a href="#3、自定义属性问题" class="headerlink" title="3、自定义属性问题"></a>3、自定义属性问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>    运行环境：在IE下，既可以通过常规的获取属性的方法来获取自定义属性，还可以通过getAttribute（）的方法来获取。在Firefox中只可以通过getAttribute（）来获取。<br>    解决办法：养成使用getAttribute（）的方法来获取，避免兼容性问题。<br></font>
+
+<h5 id="4、获取指定id名称元素的问题"><a href="#4、获取指定id名称元素的问题" class="headerlink" title="4、获取指定id名称元素的问题"></a>4、获取指定id名称元素的问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：在IE中，既可以使用eval（’idName’）的方法来获取元素，还可以通过getElementById（’idName’）的方法来获取，在Firefox中只可以通过getElementById（’idName’）的方法来获取。<br>解决办法：统一使用getElementById（’idName’）来获取，避免兼容性问题，还有就是命名idName的时候讲究一点。<br></font>
+
+<h5 id="5、window-event问题"><a href="#5、window-event问题" class="headerlink" title="5、window.event问题"></a>5、window.event问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>    运行环境：window.event只能在IE下运行，而不能在Firefox下运行,这是因为Firefox的event只能在事件发生的现场使用。Firefox必须从源处加入event作参数传递。IE忽略该参数，用window.event来读取该event。<br>    解决方法：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function a(event)&#123;</div><div class="line">   var event = event || window.event;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></font>
+
+<h5 id="6、event-x与event-y问题"><a href="#6、event-x与event-y问题" class="headerlink" title="6、event.x与event.y问题"></a>6、event.x与event.y问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：在IE下，event有x，y属性，但是没有pagex和pagey，而Firefox正好与IE相反。<br>解决办法：var x = event.x ? event.x : pageX,进行兼容处理。<br></font>
+
+<h5 id="7、removeChild和removeNode"><a href="#7、removeChild和removeNode" class="headerlink" title="7、removeChild和removeNode"></a>7、removeChild和removeNode</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：在IE中只支持removeNode，Firefox支持removeChild；<br></font>
+
+<h5 id="8、事件监听函数的问题和事件加载机制的问题"><a href="#8、事件监听函数的问题和事件加载机制的问题" class="headerlink" title="8、事件监听函数的问题和事件加载机制的问题"></a>8、事件监听函数的问题和事件加载机制的问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：主流浏览器中使用addEventListener（），在IE中使用attachEvent（）；<br>而且在主流浏览器中使用的是DOMContentLoaded方法，在IE中使用的是onreadystatechange加载。<br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if（document.addEventListener）&#123;</div><div class="line">    document.addEventListener(&apos;DOMContentLoaded&apos;,function()&#123;&#125;);</div><div class="line">&#125;else&#123;</div><div class="line">    document.attachEvent(&apos;onreadystatechange&apos;,function()&#123;&#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></font>
+
+<h5 id="9、获取当前对象的样式问题"><a href="#9、获取当前对象的样式问题" class="headerlink" title="9、获取当前对象的样式问题"></a>9、获取当前对象的样式问题</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：IE中支持的是currentStyle，在Firefox中支持的是getComputedStyle。<br>解决方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">//案例</div><div class="line">var demo = document.querySelector(&apos;.demo&apos;);</div><div class="line">if(demo.currentStyle)&#123;</div><div class="line">    var width = demo.getComputedStyle(&apos;width&apos;);</div><div class="line">&#125;else&#123;</div><div class="line">    var width = window.getComputedStyle(demo,null)[&apos;width&apos;];</div><div class="line">&#125;</div><div class="line"></div><div class="line">//封装</div><div class="line">function getStyle(obj,attr)&#123;</div><div class="line">    if(getComputedStyle)&#123;</div><div class="line">        return getComputedStyle(obj,null)[attr];</div><div class="line">    &#125;else&#123;</div><div class="line">        return obj.currentStyle(attr);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></font>
+
+<h5 id="10、page获取页面属性的封装"><a href="#10、page获取页面属性的封装" class="headerlink" title="10、page获取页面属性的封装"></a>10、page获取页面属性的封装</h5><hr>
+<font size="2" face="微软雅黑" color="#b22222"><br>运行环境：在不同的地方获取页面属性的方法不一样。<br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function scroll() &#123;</div><div class="line">    return &#123;</div><div class="line">        top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0,</div><div class="line">        left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br><br></font>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/03/js兼容/" data-id="civ2f32kh000170yipak4t9yb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/03/hello-world/" class="article-date">
+  <time datetime="2016-11-03T11:24:49.289Z" itemprop="datePublished">2016-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/03/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = <span class="string">'abr'</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/11/03/hello-world/" data-id="civ2f32ka000070yiahm3cw90" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/03/js兼容/">js兼容</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/03/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
